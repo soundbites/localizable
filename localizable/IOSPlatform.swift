@@ -10,7 +10,7 @@ import Cocoa
 
 class IOSPlatform: NSObject, LocalizationPlatform {
     func string(for localizationValue: LocalizationValue?) -> String? {
-        return localizationValue?.replacedArgumentsValue(with: "%@")
+        return localizationValue?.replacedArgumentsValue(with: "$@")
     }
 
     var platformKey: String {

@@ -67,7 +67,7 @@ struct LocalizationValue {
     }
 
     private static func regExpResults(value: String) -> NSRegularExpression? {
-        return try? NSRegularExpression(pattern: "[%][0-9]*[$][s]")
+        return try? NSRegularExpression(pattern: "[$][s]")
     }
 
 }
