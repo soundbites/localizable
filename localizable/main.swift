@@ -70,7 +70,7 @@ do {
         // add languages from the header row
         if let headerRow = csv.headerRow {
             for language in headerRow {
-                if language.characters.count > 0 && language != keyColumnHeader {
+                if language.count > 0 && language != keyColumnHeader {
                     localizationManager.addLanguage(language)
                     print("Adding support for language \(language)")
                 }

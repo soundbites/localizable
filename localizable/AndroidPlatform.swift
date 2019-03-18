@@ -9,6 +9,10 @@
 import Cocoa
 
 class AndroidPlatform: NSObject, LocalizationPlatform {
+    func string(for localizationValue: LocalizationValue?) -> String? {
+        return localizationValue?.value //Just the value
+    }
+
     var platformKey: String {
         return "android"
     }

@@ -35,5 +35,39 @@ protocol LocalizationPlatform {
 
     /// short flag used on the command line to specify this platform
     var longFlag : String {get}
+
+    func string(for localizationValue: LocalizationValue?) -> String?
     
+}
+
+struct LocalizationValue {
+
+    init?(value: String?) {
+        guard let value = value else {
+            return nil
+        }
+        self.value = value
+
+        if let results = LocalizationValue.regExpResults(value: value)?.matches(in: value, range: NSRange(location: 0, length: value.count)), results.count > 0 {
+            self.containsArguments = true
+        } else {
+            self.containsArguments = false
+        }
+    }
+
+    let containsArguments: Bool
+    let value: String
+
+    func replacedArgumentsValue(with replacement: String) -> String {
+        if let result = LocalizationValue.regExpResults(value: value)?.stringByReplacingMatches(in: value, range: NSRange(location: 0, length: value.count), withTemplate: replacement) {
+            return result
+        } else {
+            return value
+        }
+    }
+
+    private static func regExpResults(value: String) -> NSRegularExpression? {
+        return try? NSRegularExpression(pattern: "[%][0-9]*[$][s]")
+    }
+
 }

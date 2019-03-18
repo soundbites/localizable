@@ -45,8 +45,8 @@ class LocalizationManager: NSObject {
     ///   - language: language of the string
     func addString(_ value : String, key: String, language:String) {
         for platform in platforms {
-            if var langStr = languages[language]?[platform.platformKey] {
-                langStr += String(format:platform.keyValueFormat, key, value) + newline
+            if var langStr = languages[language]?[platform.platformKey], let localizedValue = platform.string(for: LocalizationValue(value: value)) {
+                langStr += String(format:platform.keyValueFormat, key, localizedValue) + newline
                 languages[language]?[platform.platformKey] = langStr
             }
 
